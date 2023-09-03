@@ -9,8 +9,8 @@ public class Start_Alistamento {
 	public static void main(String[] args) {
 		Scanner sc = new Scanner(System.in);
 		
-		Alistamento cadastro1 = new Alistamento(" ", " ", " "," "," "," "," "," ");
-		Alistamento cadastro2 = new Alistamento(" "," "," "," "," "," ", " " , " ");
+		Alistamento cadastro1 = new Alistamento(null, null, null, null, null, null, null, null);
+		Alistamento cadastro2 = new Alistamento(null, null, null, null, null, null, null, null);
 		
 		cadastro1.iniciarCadastro(sc);
 		
