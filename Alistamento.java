@@ -5,39 +5,34 @@ import java.util.Scanner;
 public class Alistamento {
 	
 	private String cadastroAlistamento[] = new String[8];
-	private int dataNasc;
+		
 	
-	
-	
-	public Alistamento(String nome, String nomeMae, String nomePai, String email, 
-			String dataNasc, String altura, String peso, String telefone) {
-		this.cadastroAlistamento[0] = nome;
-		this.cadastroAlistamento[1] = nomeMae;
-		this.cadastroAlistamento[2] = nomePai;
-		this.cadastroAlistamento[3] = email;
-		this.cadastroAlistamento[4] = dataNasc;
+	public Alistamento(String dataNasc, String nome, String nomeMae, String nomePai, String email, 
+			String altura, String peso, String telefone) {
+		this.cadastroAlistamento[0] = dataNasc;
+		this.cadastroAlistamento[1] = nome;
+		this.cadastroAlistamento[2] = nomeMae;
+		this.cadastroAlistamento[3] = nomePai;
+		this.cadastroAlistamento[4] = email;
 		this.cadastroAlistamento[5] = altura;
 		this.cadastroAlistamento[6] = peso;
 		this.cadastroAlistamento[7] = telefone;
 
 	}
 	
-	public String[] getcadastroAlistamento() {
-		return cadastroAlistamento;
-	}
-	public String getNome() {
+	public String getDataNasc() {
 		return cadastroAlistamento[0];
 	}
-	public String getNomeMae() {
+	public String getNome() {
 		return cadastroAlistamento[1];
 	}
-	public String getNomePai() {
+	public String getNomeMae() {
 		return cadastroAlistamento[2];
 	}
-	public String getEmail() {
+	public String getNomePai() {
 		return cadastroAlistamento[3];
 	}
-	public String getDataNasc() {
+	public String getEmail() {
 		return cadastroAlistamento[4];
 	}
 	public String getAltura() {
@@ -55,38 +50,36 @@ public class Alistamento {
 	}
 
 	//Métodos
-	public int calculoNasc(int dataNasc) {
-		int idade = dataNasc - 2023;
-		return idade;
+	public int calculoNasc() {
+		int dataNasc = Integer.parseInt(getDataNasc());
+		return 2023 - dataNasc;
 	}
-	public String multa(int idade) {
-		if (calculoNasc(dataNasc) >= 20) {
-			double precoMulta = (calculoNasc(dataNasc) - 19) * 5.0;
-			System.out.println("O valor da multa é de R$" + precoMulta);
+	public void multa() {
+		double precoMulta = 0;
+		if (calculoNasc() >= 20) {
+			precoMulta = (calculoNasc() - 19) * 5.0;
 		}
-		return "Preço Multa é R$00,00";
+		System.out.printf("O valor da multa é de R$%.2f" , precoMulta);
 	}
 	public void iniciarCadastro(Scanner sc) {
-		System.out.println("Programa para Alistamento Militar\n");
+		System.out.println("\nPrograma para Alistamento Militar\n");
 		System.out.println("Informe o seu ano de Nascimento: ");
-		cadastroAlistamento[4] = sc.next();
-		calculoNasc(dataNasc);
+		cadastroAlistamento[0] = sc.next();
+		int idade = calculoNasc();
 		
-		if (calculoNasc(dataNasc) < 18 && calculoNasc(dataNasc) > 45) {
-			System.out.println("Para se alistar é necessário possuir 18 anos ou menos de 45 anos.");
-		} else {
+		if (idade >= 18 && idade < 45) {
 			
 			System.out.println("Informe o seu nome completo: ");
-			cadastroAlistamento[0] = sc.next();
+			cadastroAlistamento[1] = sc.next();
 			
 			System.out.println("Informe o nome da sua Mãe: ");
-	        cadastroAlistamento[1] = sc.next();
-	
-	        System.out.println("Informe o nome do seu Pai: ");
 	        cadastroAlistamento[2] = sc.next();
 	
-	        System.out.println("Informe o seu email: ");
+	        System.out.println("Informe o nome do seu Pai: ");
 	        cadastroAlistamento[3] = sc.next();
+	
+	        System.out.println("Informe o seu email: ");
+	        cadastroAlistamento[4] = sc.next();
 	
 	        System.out.println("Informe a altura: ");
 	        cadastroAlistamento[5] = sc.next();
@@ -97,7 +90,12 @@ public class Alistamento {
 	        System.out.println("Informe o telefone: ");
 	        cadastroAlistamento[7] = sc.next();	
 	        
-	        System.out.println(toString()); 
+	        System.out.println(toString());
+	        multa();
+			
+		} else {
+			System.out.println("Para se alistar é necessário possuir entre 18 e 45 anos.");
+			
 		}
 		
 	}
@@ -106,7 +104,7 @@ public class Alistamento {
 		return "Programa de Alistamento Militar 2023 \n" + "\nNome: " + getNome() + "\nNome da Mãe; " +  getNomeMae() 
 		+ "\nNome do Pai: " + getNomePai() + "\nE-mail: " + getEmail() + "\nAltura: " + getAltura() 
 		+ "\nPeso: " + getPeso() + "\nAno de Nascimento: " + getDataNasc() +
-		"\n" + multa(dataNasc);
+		"\n";
 	}
 
 
